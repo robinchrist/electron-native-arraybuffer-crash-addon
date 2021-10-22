@@ -1,0 +1,51 @@
+{
+  "name": "corelib-test",
+  "version": "0.0.1-electron1411",
+  "description": "corelib",
+  "main": "build/main.js",
+  "scripts": {
+    "build": "cmake-ts",
+    "test": "npm run testbuild && node build/test.js",
+    "testbuild": "cmake-ts nativeonly",
+    "deps": "npm-check -p",
+    "devdeps": "npm-check -ds",
+    "testpackage": "rimraf build && cmake-ts osonly && tsc && npm pack",
+    "ts:watch": "tsc -w"
+  },
+  "author": "Robin Christ",
+  "license": "All rights Reserved",
+  "dependencies": {
+    "rxjs": "^6.5.2"
+  },
+  "files": [
+    "build/**/*"
+  ],
+  "cmake-ts": {
+    "globalCMakeOptions": [
+      {
+        "name": "CMAKE_EXPORT_COMPILE_COMMANDS",
+        "value": "1"
+      }
+    ],
+    "configurations": [
+      {
+        "os": "linux",
+        "arch": "x64",
+        "runtime": "electron",
+        "runtimeVersion": "14.1.1",
+        "toolchainFile": null
+      }
+    ],
+    "targetDirectory": "build",
+    "buildType": "Debug",
+    "projectName": "addon"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.12",
+    "cmake-ts": "^0.2.0",
+    "nan": "^2.15.0",
+    "npm-check": "^5.9.0",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.6.4"
+  }
+}
